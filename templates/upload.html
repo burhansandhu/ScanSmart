@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload QR/Barcode Image</title>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="image">Choose an image:</label><br>
+        <input type="file" id="image" name="image" accept="image/*"><br><br>
+        <button type="submit">Upload</button>
+    </form>
+    <a href="{% url 'create_qr' %}">Create QR</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR/Barcode Result</title>
+</head>
+<body>
+    <h1>Decoded QR/Barcode</h1>
+    <img src="{{ image.image.url }}" alt="Uploaded Image" style="width:300px; height:auto;">
+    <h2>Decoded Data:</h2>
+    <ul>
+        {% for obj in data %}
+            <li>Type: {{ obj.type }} - Data: {{ obj.data }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'upload_image' %}">Upload Another Image</a>
+</body>
+</html>
