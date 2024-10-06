@@ -7,19 +7,6 @@ from django.http import HttpResponse
 import qrcode
 from io import BytesIO
 
-def decode_qr_barcode(image_path):
-    img = cv2.imread(image_path)
-    decoded_objects = decode(img)
-    
-    result = []
-    for obj in decoded_objects:
-        result.append({
-            'type': obj.type,
-            'data': obj.data.decode('utf-8'),
-            'rect': obj.rect
-        })
-    return result
-
 def upload_image(request):
     if request.method == 'POST' and request.FILES['image']:
         image = request.FILES['image']
@@ -36,6 +23,29 @@ def upload_image(request):
 
         return render(request, 'result.html', {'data': decoded_data, 'image': qr_image})
     return render(request, 'upload.html')
+
+def camera_scan(request):
+    if 'data' in request.GET:
+        decoded_data = request.GET['data']  # Get the decoded data from the query parameter
+        return render(request, 'result.html', {'data': [{'type': 'QRCODE', 'data': decoded_data}], 'image': None})
+    
+    # If no data, render the camera scanning page
+    return render(request, 'camera.html')
+
+    
+
+def decode_qr_barcode(image_path):
+    img = cv2.imread(image_path)
+    decoded_objects = decode(img)
+    
+    result = []
+    for obj in decoded_objects:
+        result.append({
+            'type': obj.type,
+            'data': obj.data.decode('utf-8'),
+            'rect': obj.rect
+        })
+    return result
 
 
 def create_qr_code(request):

@@ -72,9 +72,11 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="image">Choose an image:</label><br>
-        <input type="file" id="image" name="image" accept="image/*"><br><br>
+        <input type="file" id="image" name="image" accept="image/*" capture="camera"><br><br>
         <button type="submit">Upload</button>
     </form>
-    <a href="{% url 'create_qr' %}">Create QR</a>
+    <a href="{% url 'create_qr' %}">Create QR</a><br>
+    <a href="{% url 'camera_scan' %}">Scan with Camera</a>
 </body>
 </html>
+
