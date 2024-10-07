@@ -64,6 +64,7 @@
             <li>Type: {{ obj.type }} - Data: {{ obj.data }}</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'upload_image' %}">Upload Another Image</a>
+    <a href="{% url 'upload_image' %}">Upload Another Image</a><br>
+    <a href="{% url 'camera_scan' %}">Scan with Camera</a>
 </body>
 </html>
