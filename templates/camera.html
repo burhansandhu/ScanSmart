@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Scanner</title>
-
     <style>
         #reader {
             width: 100%;
@@ -21,27 +20,25 @@
     <a href="{% url 'create_qr' %}">Create QR Code</a>
 
     {% load static %}
-    <script src="{% static 'js/html5-qrcode.min.js' %}"></script>
-
+    <script src="{% static 'JS/html5-qrcode.min.js' %}"></script> <!-- Updated path -->
     <script>
-        window.onload = function() {
+        document.addEventListener("DOMContentLoaded", function() {
             const html5QrCode = new Html5Qrcode("reader");
 
             function startScanning() {
                 const qrCodeSuccessCallback = (decodedText, decodedResult) => {
                     console.log(`Decoded text: ${decodedText}`);
-                    alert(`Decoded text: ${decodedText}`); // Alert to see if it's being detected
+                    alert(`Decoded text: ${decodedText}`);
                     window.location.href = `{% url 'camera_scan' %}?data=${encodeURIComponent(decodedText)}`;
                 };
 
                 const config = {
-                    fps: 10, // Frame rate to process the video
-                    qrbox: { width: 250, height: 250 } // QR code scanning box size
+                    fps: 10,
+                    qrbox: { width: 250, height: 250 }
                 };
 
-                // Start scanning
                 html5QrCode.start(
-                    { facingMode: "environment" }, // Use the back camera
+                    { facingMode: "environment" },
                     config,
                     qrCodeSuccessCallback
                 ).then(() => {
@@ -60,7 +57,7 @@
                     console.error(`Error stopping scanning: ${err}`);
                 });
             };
-        };
+        });
     </script>
 </body>
 </html>
